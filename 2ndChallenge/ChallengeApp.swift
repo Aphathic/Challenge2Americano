@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
-struct _ndChallengeApp: App {
+struct ChallengeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PreMainView()
         }
+        .modelContainer(for: DataItem.self)
     }
 }
