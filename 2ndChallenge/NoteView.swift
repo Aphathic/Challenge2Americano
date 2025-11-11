@@ -1,3 +1,4 @@
+
 //
 //  ContentView.swift
 //  2ndChallenge
@@ -8,31 +9,40 @@
 import SwiftUI
 import SwiftData
 
-struct NotePage: View {
+struct NoteView: View {
     
     @State private var goToNewNote = false
-
+    
+    
     var title1 = "Note \(Date.now.formatted(date: .abbreviated, time: .shortened))"
     
-    @State var text = ""
     @FocusState var focus
-    @Environment(\.modelContext) private var context
 
+    @Environment(\.modelContext) private var context
+    @State var note: DataItem
+    @State private var texxt: String
+    
+    
+    init(note: DataItem) {
+            self.note = note
+            texxt = note.Text
+        }
+    
     var body: some View {
         NavigationStack {
             ZStack {
-                
                 Color.BCK
+                
                 
                 HStack {
                     
-                    TextEditor(text: $text)
+                    TextEditor(text: $texxt)
                         .tint(.yellow)
                         .focused($focus)
                         .font(.title)
                         .foregroundColor(Color.NBCK)
                         .fontWeight(.bold)
-                        
+                    
                 } //Hstack
                 .padding(.top, 110)
                 .padding(.leading, 20)
@@ -44,13 +54,14 @@ struct NotePage: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("", systemImage: "checkmark") {
-                        addItem(a: text)
                         goToNewNote = true
+                        EditNote()
                     }
                     .tint(.yellow)
                     .navigationDestination(isPresented: $goToNewNote) {
                         MainPageView()
                     }
+                    
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
@@ -66,24 +77,29 @@ struct NotePage: View {
                             .padding(.leading, 10)
                         
                         Image(systemName:
-                            "ellipsis")
+                                "ellipsis")
                         .padding(.trailing, 10)
                     }
                     .foregroundStyle(Color.NBCK)
                 }
+                
             }
-
+            
         }//NS
     }//View
     
-    func addItem(a: String) {
-        let NewNote = DataItem(Title: title1, Text: a)
-        context.insert(NewNote)
-        try? context.save()
+    private func EditNote(){
+        note.Text = texxt
+        do {
+            try context.save()
+        } catch  {
+            print("Error during edit")
+        }
+        
     }
     
-}
+}	
 
 #Preview {
-    NotePage()
+    NoteView(note: DataItem(Title: "", Text: ""))
 }
