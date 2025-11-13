@@ -11,8 +11,9 @@ import SwiftData
 struct NotePage: View {
     
     @State private var goToNewNote = false
+    @State private var Move = false
 
-    var title1 = "Note \(Date.now.formatted(date: .abbreviated, time: .shortened))"
+    var title1 = "\(Date.now.formatted(date: .abbreviated, time: .shortened))"
     
     @State var text = ""
     @FocusState var focus
@@ -43,6 +44,7 @@ struct NotePage: View {
             .ignoresSafeArea()
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
+                    
                     Button("", systemImage: "checkmark") {
                         addItem(a: text)
                         goToNewNote = true
@@ -71,9 +73,21 @@ struct NotePage: View {
                     }
                     .foregroundStyle(Color.NBCK)
                 }
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("", systemImage: "chevron.backward") {
+                        Move = true
+                        addItem(a: text)
+                        
+                        
+                    }// Button Ellipsis
+                    .navigationDestination(isPresented: $Move) {
+                        MainPageView()
+                    }
+                }
             }
 
         }//NS
+        .navigationBarBackButtonHidden(true)
     }//View
     
     func addItem(a: String) {

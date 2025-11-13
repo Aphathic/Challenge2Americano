@@ -14,8 +14,8 @@ struct NoteView: View {
     @State private var goToNewNote = false
     
     
-    var title1 = "Note \(Date.now.formatted(date: .abbreviated, time: .shortened))"
-    
+    var ttitle1 = "\(Date.now.formatted(date: .abbreviated, time: .shortened))"
+
     @FocusState var focus
 
     @Environment(\.modelContext) private var context
@@ -60,6 +60,7 @@ struct NoteView: View {
                     .tint(.yellow)
                     .navigationDestination(isPresented: $goToNewNote) {
                         MainPageView()
+                        
                     }
                     
                 }
@@ -70,6 +71,7 @@ struct NoteView: View {
                     }
                     .foregroundStyle(Color.NBCK)
                 }
+                
                 ToolbarSpacer(.fixed, placement: .topBarTrailing)
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack {
@@ -83,6 +85,7 @@ struct NoteView: View {
                     .foregroundStyle(Color.NBCK)
                 }
                 
+                
             }
             
         }//NS
@@ -90,6 +93,7 @@ struct NoteView: View {
     
     private func EditNote(){
         note.Text = texxt
+        note.Title = ttitle1
         do {
             try context.save()
         } catch  {
