@@ -5,8 +5,8 @@
 //  Created by Crescenzo Di Franco on 05/11/25.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @main
 struct ChallengeApp: App {
@@ -15,5 +15,6 @@ struct ChallengeApp: App {
             PreMainView()
         }
         .modelContainer(for: DataItem.self)
+
     }
 }

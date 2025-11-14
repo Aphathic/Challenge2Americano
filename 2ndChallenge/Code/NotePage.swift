@@ -5,51 +5,50 @@
 //  Created by Crescenzo Di Franco on 05/11/25.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct NotePage: View {
-    
+
     @State private var goToNewNote = false
     @State private var Move = false
-
-    var title1 = "\(Date.now.formatted(date: .abbreviated, time: .shortened))"
-    
     @State var text = ""
+    var title1 = "\(Date.now.formatted(date: .abbreviated, time: .shortened))"
+
     @FocusState var focus
+
     @Environment(\.modelContext) private var context
 
     var body: some View {
         NavigationStack {
             ZStack {
-                
+
                 Color.BCK
-                
+
                 HStack {
-                    
+
                     TextEditor(text: $text)
                         .tint(.yellow)
                         .focused($focus)
                         .font(.title)
                         .foregroundColor(Color.NBCK)
                         .fontWeight(.bold)
-                        
-                } //Hstack
+
+                }  //Hstack
                 .padding(.top, 110)
                 .padding(.leading, 20)
                 .onAppear {
                     focus = true
-                }//OnAppear
-            }//ZStack
+                }  //OnAppear
+            }  //ZStack
             .ignoresSafeArea()
             .toolbar {
-                
+
                 ToolbarItem(placement: .confirmationAction) {
                     if text == "" {
-                        
-                    }
-                    else {
-                        
+
+                    } else {
+
                         Button("", systemImage: "checkmark") {
                             addItem(a: text)
                             goToNewNote = true
@@ -60,12 +59,10 @@ struct NotePage: View {
                         }
                     }
                 }
-                
-                
-                
+
                 ToolbarItem(placement: .topBarTrailing) {
                     if text == "" {
-                        
+
                     } else {
                         Button("", systemImage: "arrow.uturn.backward") {
                             //
@@ -76,11 +73,16 @@ struct NotePage: View {
                 ToolbarSpacer(.fixed, placement: .topBarTrailing)
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack {
-                        Image(systemName: "square.and.arrow.up").padding(.trailing, 20)
-                            .padding(.leading, 10)
-                        
-                        Image(systemName:
-                            "ellipsis")
+                        Image(systemName: "square.and.arrow.up").padding(
+                            .trailing,
+                            20
+                        )
+                        .padding(.leading, 10)
+
+                        Image(
+                            systemName:
+                                "ellipsis"
+                        )
                         .padding(.trailing, 10)
                     }
                     .foregroundStyle(Color.NBCK)
@@ -89,29 +91,28 @@ struct NotePage: View {
                     Button("", systemImage: "chevron.backward") {
                         Move = true
                         if text == "" {
-                            
+
                         } else {
                             addItem(a: text)
                         }
-                        
-                        
-                    }// Button Ellipsis
+
+                    }  // Button Ellipsis
                     .navigationDestination(isPresented: $Move) {
                         MainPageView()
                     }
                 }
             }
 
-        }//NS
+        }  //NS
         .navigationBarBackButtonHidden(true)
-    }//View
-    
+    }  //View
+
     func addItem(a: String) {
         let NewNote = DataItem(Title: title1, Text: a)
         context.insert(NewNote)
         try? context.save()
     }
-    
+
 }
 
 #Preview {
