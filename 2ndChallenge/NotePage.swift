@@ -43,23 +43,35 @@ struct NotePage: View {
             }//ZStack
             .ignoresSafeArea()
             .toolbar {
+                
                 ToolbarItem(placement: .confirmationAction) {
-                    
-                    Button("", systemImage: "checkmark") {
-                        addItem(a: text)
-                        goToNewNote = true
+                    if text == "" {
+                        
                     }
-                    .tint(.yellow)
-                    .navigationDestination(isPresented: $goToNewNote) {
-                        MainPageView()
+                    else {
+                        
+                        Button("", systemImage: "checkmark") {
+                            addItem(a: text)
+                            goToNewNote = true
+                        }
+                        .tint(.yellow)
+                        .navigationDestination(isPresented: $goToNewNote) {
+                            MainPageView()
+                        }
                     }
                 }
                 
+                
+                
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("", systemImage: "arrow.uturn.backward") {
-                        //
+                    if text == "" {
+                        
+                    } else {
+                        Button("", systemImage: "arrow.uturn.backward") {
+                            //
+                        }
+                        .foregroundStyle(Color.NBCK)
                     }
-                    .foregroundStyle(Color.NBCK)
                 }
                 ToolbarSpacer(.fixed, placement: .topBarTrailing)
                 ToolbarItem(placement: .topBarTrailing) {
@@ -76,7 +88,11 @@ struct NotePage: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("", systemImage: "chevron.backward") {
                         Move = true
-                        addItem(a: text)
+                        if text == "" {
+                            
+                        } else {
+                            addItem(a: text)
+                        }
                         
                         
                     }// Button Ellipsis
