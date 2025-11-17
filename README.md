@@ -8,13 +8,21 @@ The project includes multiple screens, persistent data management, and a simple,
 ## 📂 Project Structure
 
 Challenge2Americano
+
 ├── ChallengeApp.swift
+
 ├── PreMainView.swift
+
 ├── MainPageView.swift
+
 ├── NoteView.swift
+
 ├── NotePage.swift
+
 ├── UovoView.swift
+
 ├── Assets.xcassets
+
 └── DataFile.swift
 
 ---
@@ -23,8 +31,8 @@ Challenge2Americano
 
 - SwiftUI  
 - SwiftData  
-- iOS 17+  
-- Xcode 16+  
+- iOS 26.1
+- Xcode 26.1.1  
 
 ---
 
@@ -47,35 +55,33 @@ class DataItem: Identifiable {
     var Title: String
     var Text: String
 }
-✔️ Included Screens
+```
+✔️ Included Screens: 
+
 PreMainView – initial landing view
 
 MainPageView – note list screen
 
 NotePage – note editor / viewer
 
-UovoView – fun bonus screen showing an “Uovo” image
+---
 
-🚀 How to Run the Project
+## 🚀 How to Run the Project
 Clone the repository:
 
-bash
-Copia codice
+```bash
 git clone https://github.com/Aphathic/Challenge2Americano.git
 Open the project in Xcode:
-
-bash
-Copia codice
-open 2ndChallenge.xcodeproj
-Select a device or simulator
+```
 
 Press ⌘ + R to run
+
+---
 
 🧩 SwiftData Persistence
 The app initializes SwiftData in ChallengeApp.swift:
 
-swift
-Copia codice
+```swift
 @main
 struct ChallengeApp: App {
     var body: some Scene {
@@ -85,19 +91,16 @@ struct ChallengeApp: App {
         }
     }
 }
+```
 SwiftData automatically handles the saving, loading, and syncing of the note items.
 
 📈 Future Improvements
-Search functionality
+- Search functionality
+- Sorting options
+- Note categories / tags
+- iCloud sync
+- Advanced UI animations
 
-Sorting options
-
-Note categories / tags
-
-iCloud sync
-
-Advanced UI animations
-
-👤 Author
-Developed by Crescenzo Di Franco
+## 👤 Author
+Developed by Crescenzo Di Franco November
 2025
