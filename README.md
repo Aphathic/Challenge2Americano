@@ -17,9 +17,6 @@ Challenge2Americano
 ├── Assets.xcassets
 └── DataFile.swift
 
-yaml
-Copia codice
-
 ---
 
 ## 🔧 Technologies Used
